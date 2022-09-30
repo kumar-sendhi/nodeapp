@@ -4,6 +4,7 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path')
 
+const PORT = process.env.PORT || 3000
 const app = express();
 
 //app.use(morgan('combined'));
@@ -15,5 +16,5 @@ app.get("/",(req,res)=>{
 })
 
 app.listen(3000,()=>{
-    debug(`listening to port ${chalk.green('3000')}`);
+    debug(`listening to port ${chalk.green(PORT)}`);
 })
