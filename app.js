@@ -4,6 +4,8 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path')
 
+const sessions = require('./src/data/sessions.json');
+
 const PORT = process.env.PORT || 3000
 const app = express();
 const sessionRouter = express.Router();
@@ -18,15 +20,16 @@ app.set('view engine','ejs');
 
 sessionRouter.route('/')
 .get((req,res)=>{
-    res.send('hello sessions');
+    res.render('sessions',{sessions});
 })
 
-sessionRouter.route('/1')
+sessionRouter.route('/:id')
 .get((req,res)=>{
-    res.send('hello single session');
+    const id = req.params.id;
+    res.send('hello single session '+id);
 })
 
-app.use('/sessions', sessionRouter)
+app.use('/session', sessionRouter)
 
 app.get("/",(req,res)=>{
     res.render('index', {title: 'Globomantics', data :['a','b','c']});
