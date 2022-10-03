@@ -3,6 +3,16 @@ const express = require('express');
 const debug = require('debug')('app:sessionRouter');
 const mongodb=require('mongodb')
 const sessionRouter = express.Router();
+
+sessionRouter.use((req,res, next)=>{
+    if(req.user){
+        next();
+    }
+    else{
+        res.redirect('/auth/signIn')
+    }
+    
+})
 const sessions = require('../data/sessions.json');
 
 sessionRouter.route('/')
